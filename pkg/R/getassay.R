@@ -204,13 +204,13 @@ get.assay <- function(aid, quiet=TRUE) {
 
 
 .eh <- function() {
-  .itemNames <- c('CanonicalSmile', 'MolecularWeight', 'TotalFormalCharge',
+  .itemNames <- c('IUPACName','CanonicalSmile','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
                   'XLogP', 'HydrogenBondDonorCount', 'HydrogenBondAcceptorCount',
                   'HeavyAtomCount', 'TPSA')
-  .types <- c('character', 'double', 'integer', 'double', 'integer', 'integer',
+  .types <- c('character','character','character', 'double', 'integer', 'double', 'integer', 'integer',
               'integer', 'double')
 
-  tmpdata <- data.frame(t(rep(0,9)))
+  tmpdata <- data.frame(t(rep(0,12)))
   validItem <- FALSE
   textval <- NA
 
