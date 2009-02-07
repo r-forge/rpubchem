@@ -20,6 +20,21 @@ require(car)
   }
   unlist(nx)
 }
+
+.gunzip <- function(iname, oname) {
+  icon <- gzfile(iname, open='r')
+  ocon <- file(oname, open='w')
+  while (TRUE) {
+    lines <-readLines(icon, n=100)
+    if (length(lines) == 0) break
+    lines <- paste(lines, sep='', collapse='\n')
+    writeLines(lines, con = ocon)
+  }
+  file.remove(iname)
+  close(icon)
+  close(ocon)
+}
+
 get.assay.desc <- function(aid) {
   descURL <- 'ftp://ftp.ncbi.nlm.nih.gov/pubchem/Bioassay/CSV/Description/'
   url <- paste(descURL,aid,'.descr.xml.gz', sep='', collapse='')  
@@ -32,11 +47,9 @@ get.assay.desc <- function(aid) {
   if (class(status) == 'try-error') {
     return(NULL)
   }
-  
-  cmd <- paste('gzip -d ', tmpdest, sep='',collapse='')
-  system(cmd)
 
-  xmlfile <- strsplit(tmpdest, '\\.')[[1]][1]  
+  xmlfile <- strsplit(tmpdest, '\\.')[[1]][1]
+  .gunzip(tmpdest, xmlfile)
   xml <- xmlTreeParse(xmlfile, asTree=TRUE)
   root <- xmlRoot(xml)
 
@@ -146,14 +159,12 @@ get.assay <- function(aid, quiet=TRUE) {
   if (class(status) == 'try-error') {
     stop("Error in the download")
   }
-
   if (!quiet) cat("Got data file\n")
 
-  cmd <- paste('gzip -d ', tmpdest, sep='',collapse='')
-  system(cmd)
-  if (!quiet) cat('Loading data\n')
-
   csvfile <- strsplit(tmpdest, '\\.')[[1]][1]
+    .gunzip(tmpdest, csvfile)
+
+  if (!quiet) cat('Loading data\n')  
   dat <- read.csv(csvfile, header=TRUE)
   dat <- dat[,-c(2,6,8)]
 

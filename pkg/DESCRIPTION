@@ -1,6 +1,6 @@
 Package: rpubchem
-Version: 1.4
-Date: 2006-08-30
+Version: 1.4.1
+Date: 2009-02-6
 Title: rpubchem - Interface to the PubChem Collection
 Author: Rajarshi Guha <rguha@indiana.edu>
 Maintainer: Rajarshi Guha <rguha@indiana.edu>
