@@ -180,7 +180,7 @@ get.assay <- function(aid, quiet=TRUE) {
   ## attributes
   if (!quiet) cat('Processing descriptions\n')
   desc <- get.assay.desc(aid)
-  if (is.null(desc)) warn("couldn't get description data'")
+  if (is.null(desc)) warning("couldn't get description data'")
 
   attr(dat, 'description') <- desc$assay.desc
   attr(dat, 'comments') <- desc$assay.comments
@@ -221,7 +221,7 @@ get.assay <- function(aid, quiet=TRUE) {
   .types <- c('character','character','character', 'double', 'integer', 'double', 'integer', 'integer',
               'integer', 'double')
 
-  tmpdata <- data.frame(t(rep(0,12)))
+  tmpdata <- data.frame(t(rep(0,11)))
   validItem <- FALSE
   textval <- NA
 
@@ -236,7 +236,7 @@ get.assay <- function(aid, quiet=TRUE) {
     }
 
     if (name == 'Id') inId <<- TRUE
-    
+
     if (name == 'Item' && attr[['Name']] %in% .itemNames) {
       validItem <<- TRUE
       textval <<- NA
@@ -367,7 +367,7 @@ get.cid <- function(cid, quiet=TRUE, from.file=FALSE) {
   }
 
   list(startElement=startElement, endElement=endElement, text=text,
-       endDocument=endDocument, startDocument=startDocument, data=function() {tmpdata})
+       data=function() {tmpdata})
 }
 
 get.sid.list <- function(cid, quiet=TRUE, from.file=FALSE) {
