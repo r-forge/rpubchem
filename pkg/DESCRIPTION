@@ -1,9 +1,9 @@
 Package: rpubchem
-Version: 1.4.1
-Date: 2009-02-6
+Version: 1.4.2
+Date: 2009-02-8
 Title: rpubchem - Interface to the PubChem Collection
-Author: Rajarshi Guha <rguha@indiana.edu>
-Maintainer: Rajarshi Guha <rguha@indiana.edu>
+Author: Rajarshi Guha <rajarshi.guha@gmail.com>
+Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: R (>= 2.0.0), XML, car
 License: GPL version 2 or later
 Description: Access PubChem data (compounds, substance, assays). Structural information
