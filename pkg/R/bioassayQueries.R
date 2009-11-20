@@ -44,7 +44,7 @@
   </PCT-Data_input>
 </PCT-Data>'
 
-get.aid.by.cid <- function(cid, type='raw') {
+get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
 
   if (!(type %in% c('tested','active','inactive','discrepant','raw')))
       stop("Invalid type specified")
@@ -62,7 +62,10 @@ get.aid.by.cid <- function(cid, type='raw') {
   xml <- xmlTreeParse(h$value(), asText=TRUE, asTree=TRUE)
   root <- xmlRoot(xml)
   reqid <- xmlElementsByTagName(root, 'PCT-Waiting_reqid', recursive=TRUE)
-  if (length(reqid) != 1) stop("Malformed request id document")
+  if (length(reqid) != 1) {
+    if (!quiet) warn("Malformed request id document")
+    return(NULL)
+  }
   reqid <- xmlValue(reqid[[1]])
 
   ## start polling
@@ -83,7 +86,7 @@ get.aid.by.cid <- function(cid, type='raw') {
   ## OK, got the link to our result
   link <- xmlElementsByTagName(root, 'PCT-Download-URL_url', recursive=TRUE)
   if (length(link) != 1) {
-    print("Polling finished but no download URL")
+    if (!quiet) print("Polling finished but no download URL")
     return(NULL)
   }
   link <- xmlValue(link[[1]])
@@ -97,7 +100,7 @@ get.aid.by.cid <- function(cid, type='raw') {
                               mode='wb', quiet=TRUE),
                 silent=TRUE)
   if (class(status) == 'try-error') {
-    print(status)
+    if (!quiet) print(status)
     return(NULL)
   }
 
@@ -122,9 +125,4 @@ get.aid.by.cid <- function(cid, type='raw') {
          discrepant = dat[dat$discrepant == 1,1],
          tested = dat[,1],
          raw = ret)
-}
-
-if (FALSE){
-source('pkg/R/bioassayQueries.R')
-d <- get.assay.by.cid(3243128, 'active')
 }
