@@ -30,7 +30,7 @@ get.aid.by.cid(cid, type="raw", quiet=TRUE)
   If the \code{type} argument was one of 'active', 'inactive', 'discrepant' or 
   'tested' a numeric vector of assay IDs. If 'raw' was specifiec, a binary matrix
   is returned with the number of rows equal to the number of assays the compound
-  was  tested in and 4 columns - AID, active, inactive, discrepant. If a row has a 
+  was  tested in and 4 columns - aid, active, inactive, discrepant. If a row has a 
  a 1 in columns 2 to 4, it indicates that the compound is either active, inactive
 or discrepant.
 
@@ -45,7 +45,7 @@ between subsequent calls usually allows the query to successfully complete}
 }
 \keyword{programming}
 
-\author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}
+\author{Rajarshi Guha \email{rguha@indiana.edu}}
 \concept{PubChem}
 \concept{pubchem}
 \concept{compound}

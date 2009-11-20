@@ -63,7 +63,7 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
   root <- xmlRoot(xml)
   reqid <- xmlElementsByTagName(root, 'PCT-Waiting_reqid', recursive=TRUE)
   if (length(reqid) != 1) {
-    if (!quiet) warn("Malformed request id document")
+    if (!quiet) warning("Malformed request id document")
     return(NULL)
   }
   reqid <- xmlValue(reqid[[1]])
@@ -86,7 +86,7 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
   ## OK, got the link to our result
   link <- xmlElementsByTagName(root, 'PCT-Download-URL_url', recursive=TRUE)
   if (length(link) != 1) {
-    if (!quiet) print("Polling finished but no download URL")
+    if (!quiet) warning("Polling finished but no download URL")
     return(NULL)
   }
   link <- xmlValue(link[[1]])
@@ -100,7 +100,7 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
                               mode='wb', quiet=TRUE),
                 silent=TRUE)
   if (class(status) == 'try-error') {
-    if (!quiet) print(status)
+    if (!quiet) warning(status)
     return(NULL)
   }
 
@@ -124,5 +124,5 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
          inactive = dat[dat$inactive == 1,1],
          discrepant = dat[dat$discrepant == 1,1],
          tested = dat[,1],
-         raw = ret)
+         raw = ret[,-5])
 }
