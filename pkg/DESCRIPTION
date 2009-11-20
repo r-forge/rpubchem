@@ -1,10 +1,10 @@
 Package: rpubchem
-Version: 1.4.2
-Date: 2009-02-8
+Version: 1.4.3
+Date: 2009-11-18
 Title: rpubchem - Interface to the PubChem Collection
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
-Depends: R (>= 2.0.0), XML, car
+Depends: R (>= 2.0.0), XML, car, RCurl
 License: GPL version 2 or later
 Description: Access PubChem data (compounds, substance, assays). Structural information
 	     is provided in the form of SMILES strings. This package only provides access
